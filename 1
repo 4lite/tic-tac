@@ -1,0 +1,77 @@
+# Tic Tac Toe Game
+
+# Initialize the board as a list of empty strings
+board = ["", "", "", "", "", "", "", "", ""]
+
+# Function to display the current state of the board
+def display_board():
+    print(board[0] + " | " + board[1] + " | " + board[2])
+    print("---------")
+    print(board[3] + " | " + board[4] + " | " + board[5])
+    print("---------")
+    print(board[6] + " | " + board[7] + " | " + board[8])
+    print("\n")
+
+# Function to check if a player has won
+def check_win(player):
+    # Check rows
+    if board[0] == player and board[1] == player and board[2] == player:
+        return True
+    if board[3] == player and board[4] == player and board[5] == player:
+        return True
+    if board[6] == player and board[7] == player and board[8] == player:
+        return True
+    # Check columns
+    if board[0] == player and board[3] == player and board[6] == player:
+        return True
+    if board[1] == player and board[4] == player and board[7] == player:
+        return True
+    if board[2] == player and board[5] == player and board[8] == player:
+        return True
+    # Check diagonals
+    if board[0] == player and board[4] == player and board[8] == player:
+        return True
+    if board[2] == player and board[4] == player and board[6] == player:
+        return True
+    # No win found
+    return False
+
+# Function to check if the board is full
+def check_full():
+    return "" not in board
+
+# Function to play the game
+def play_game():
+    # Print the initial state of the board
+    display_board()
+    # Loop until the game is over
+    while True:
+        # Player 1's turn
+        position = int(input("Player 1 (X): Enter a position (1-9): "))
+        if board[position-1] != "":
+            print("That position is already taken. Try again.")
+            continue
+        board[position-1] = "X"
+        display_board()
+        if check_win("X"):
+            print("Player 1 (X) wins!")
+            break
+        if check_full():
+            print("It's a tie!")
+            break
+        # Player 2's turn
+        position = int(input("Player 2 (O): Enter a position (1-9): "))
+        if board[position-1] != "":
+            print("That position is already taken. Try again.")
+            continue
+        board[position-1] = "O"
+        display_board()
+        if check_win("O"):
+            print("Player 2 (O) wins!")
+            break
+        if check_full():
+            print("It's a tie!")
+            break
+
+# Play the game
+play_game()
